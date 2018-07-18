@@ -2,15 +2,16 @@ var http = require('http');
 var url = require('url');
 
 function start(route, handle) {
-  function onRequqest(req, res) {
-    var pathname = url.parse(req.url).pathname;
+  function onRequqest(request, response) {
+    var pathname = url.parse(request.url).pathname;
 
     console.log(`Request for ${pathname} received.`);
 
-    res.writeHead(200, {"Content-Type" : "text/plain"});
-    var content = route(handle, pathname);
-    res.write(content);
-    res.end();
+    // response.writeHead(200, {"Content-Type" : "text/plain"});
+    // var content = route(handle, pathname);
+    // response.write(content);
+    // response.end();
+    route(handle, pathname, response)
   }
 
   http.createServer(onRequqest).listen(3000);

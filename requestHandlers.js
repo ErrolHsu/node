@@ -1,16 +1,27 @@
-function home() {
+var {exec} = require('child_process')
+
+function home(response) {
   console.log("Request handler 'home' was called.");
-  return "you are in Home";
+
+  exec("ls -lah", function(error, stdout, stderr) {
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write(stdout);
+    response.end();
+  })
 }
 
-function login() {
+function login(response) {
   console.log("Request handler 'login' was called.");
-  return "you are in Login"
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("you are in Login");
+  response.end();
 }
 
-function upload() {
+function upload(response) {
   console.log("Request handler 'upload' was called.");
-  return "you are in Upload"
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("you are in Upload");
+  response.end();
 }
 
 exports.home = home;
