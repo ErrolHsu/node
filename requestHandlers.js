@@ -1,17 +1,9 @@
-var {exec} = require('child_process')
-var {readFile} = require('fs')
+var {exec} = require('child_process');
+var {readFile} = require('fs');
 var querystring = require('querystring');
 
 function home(response) {
   console.log("Request handler 'home' was called.");
-
-  // exec("ls -lah", function(error, stdout, stderr) {
-  //   response.writeHead(200, {"Content-Type": "text/plain"});
-  //   response.write(stdout);
-  //   response.end();
-  // })
-  // var body = 'xx'
-
   readFile('index.html', function(err, data) {
     if (err) throw err;
     var body = data.toString();
@@ -39,6 +31,24 @@ function upload(response, postData) {
   response.end();
 }
 
+function show(response, postData) {
+  console.log("Request handler 'show' was called.");
+  readFile('./tmp/clock.png', 'binary', function(error, file) {
+    if(error) {
+      response.writeHead(500, {"Content-Type": "text/plain"});
+      response.write(`${error}\n`);
+      response.end();
+    } else {
+      response.writeHead(200, {"Content-Type": "image/png"});
+      response.write(file, 'binary');
+      response.end();
+    }
+  })
+}
+
+
+
 exports.home = home;
 exports.login = login;
 exports.upload = upload;
+exports.show = show;
