@@ -7,10 +7,10 @@
   </head>
 
   <body>
-    <form action="/upload" method="post">
-      <textarea name="text" rows="20" cols="60"></textarea>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <input type="file" name='upload'>
       <br>
-      <input type="submit" value="Submit text" />
+      <input type="submit" value="Submit" />
     </form>
   </body>
 
