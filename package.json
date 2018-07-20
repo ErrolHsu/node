@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "pkg": "node_modules/.bin/pkg . -t host"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,10 @@
   "homepage": "https://github.com/ErrolHsu/node#readme",
   "dependencies": {
     "formidable": "^1.2.1"
-  }
+  },
+  "devDependencies": {
+    "pkg": "^4.3.3"
+  },
+  "pkg": {},
+  "bin": "index.js"
 }

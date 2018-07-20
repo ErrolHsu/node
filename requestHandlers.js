@@ -1,12 +1,14 @@
-var {exec} = require('child_process');
-var fs = require("fs");
-var {readFile} = require('fs');
-var querystring = require('querystring');
-var formidable = require("formidable");
+const {exec} = require('child_process');
+const fs = require("fs");
+const {readFile} = require('fs');
+const querystring = require('querystring');
+const formidable = require("formidable");
+const path = require('path')
 
 function home(response) {
   console.log("Request handler 'home' was called.");
-  readFile('index.html', function(err, data) {
+  var index_path = path.join(__dirname, 'index.html')
+  readFile(index_path, function(err, data) {
     if (err) throw err;
     var body = data.toString();
     response.writeHead(200, {"Content-Type": "text/html"});
@@ -36,7 +38,6 @@ function upload(response, request) {
     response.write("<img src='/show'>");
     response.end();
   })
-
 }
 
 function show(response) {
@@ -54,9 +55,19 @@ function show(response) {
   })
 }
 
+function show_path(response) {
+  response.writeHead(200, {"Content-Type": "text/html"});
+  response.write(`__dirname     is ${__dirname} <br/>`);
+  response.write(`__filename    is ${__filename} <br/>`);
+  response.write(`process.cwd() is ${process.cwd()} <br/>`);
+  response.write(`./            is ${path.resolve('./')} <br/>`);
+  response.end();
+}
 
 
 exports.home = home;
 exports.login = login;
 exports.upload = upload;
 exports.show = show;
+exports.show_path = show_path;
+

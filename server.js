@@ -1,5 +1,5 @@
-var http = require('http');
-var url = require('url');
+const http = require('http');
+const url = require('url');
 
 function start(route, handle) {
   function onRequqest(request, response) {
@@ -7,7 +7,7 @@ function start(route, handle) {
 
     console.log(`${request.method}  Request for ${pathname} received.`);
 
-    route(handle, pathname, response, request)
+    route(handle, pathname, response, request);
   }
 
   http.createServer(onRequqest).listen(3000);
